@@ -26,7 +26,8 @@ test("server-renders the finished SlashToken landing page", async () => {
   assert.match(html, /Angadslr\/Token-Optimizer/);
   assert.match(html, /Inspect the source/);
   assert.match(html, /href="\/docs"[^>]*>Docs</i);
-  assert.match(html, /Demo[\s\S]*How it works[\s\S]*Safeguards[\s\S]*Open source[\s\S]*Docs/i);
+  assert.match(html, /href="\/docs"[^>]*class="header-docs-link"/i);
+  assert.doesNotMatch(html, /aria-label="Primary navigation"|aria-controls="mobile-navigation"/i);
   assert.match(html, /href="\/docs#quickstart"[^>]*>\s*Try it in Codex/i);
   assert.doesNotMatch(html, /Explore the repository/i);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|PRODFLOW|Inquire Now|Lorem ipsum/i);
@@ -42,6 +43,7 @@ test("renders the multilingual-first reader journey and real repository links", 
   assert.match(html, /Average input-token savings/);
   assert.match(html, /OBSERVED IN EARLY MVP TESTS/);
   assert.match(html, /34%/);
+  assert.match(html, /OBSERVED IN EARLY MVP TESTS/);
   assert.match(html, /projects with more than 10 million output tokens/i);
   assert.match(html, /Results vary by model, language/);
   assert.doesNotMatch(html, /30%/);
@@ -86,6 +88,11 @@ test("server-renders complete beginner installation documentation", async () => 
   assert.match(html, /MCP diagnostics/);
   assert.match(html, /MCP does not intercept the current prompt/);
   assert.match(html, /cannot reduce the input tokens consumed by the current Codex turn/);
+  assert.match(html, /Adjust reasoning effort and Codex defaults/);
+  assert.match(html, /model_reasoning_effort = &quot;high&quot;/);
+  assert.match(html, /Settings → Configuration → Open config\.toml/);
+  assert.match(html, /approval_policy = &quot;on-request&quot;/);
+  assert.match(html, /sandbox_mode = &quot;workspace-write&quot;/);
   assert.match(html, /pre-send optimization path for Codex/);
   assert.match(html, /separate request to SlashToken(?:&apos;|&#x27;)s configured NVIDIA\/DeepSeek provider/);
   assert.match(html, /does not replace or rewrite the prompt already submitted to Codex/);
@@ -112,6 +119,7 @@ test("documentation navigation targets real sections", async () => {
     "choose-path",
     "approval-ui",
     "mcp",
+    "codex-config",
     "codex-setup-prompt",
     "verify",
     "troubleshooting",
@@ -122,6 +130,6 @@ test("documentation navigation targets real sections", async () => {
     assert.match(html, new RegExp(`id="${id}"`, "i"));
   }
 
-  assert.match(html, /aria-controls="mobile-navigation"/);
+  assert.doesNotMatch(html, /aria-controls="mobile-navigation"/);
   assert.match(html, /aria-current="page"[^>]*>Docs/i);
 });

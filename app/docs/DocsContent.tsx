@@ -24,6 +24,8 @@ const CODEX_CLI_DOCS = "https://learn.chatgpt.com/docs/codex/cli";
 const CODEX_COMMANDS_DOCS = "https://learn.chatgpt.com/docs/developer-commands";
 const CODEX_GLOSSARY_DOCS = "https://learn.chatgpt.com/docs/glossary";
 const CODEX_MCP_DOCS = "https://learn.chatgpt.com/docs/extend/mcp";
+const CODEX_CONFIG_DOCS = "https://learn.chatgpt.com/docs/config-file/config-basic";
+const CODEX_CONFIG_REFERENCE_DOCS = "https://learn.chatgpt.com/docs/config-file/config-reference";
 const NVIDIA_KEY_DOCS = "https://docs.api.nvidia.com/nim/re/docs/api-quickstart";
 
 const docsNavigation = [
@@ -34,6 +36,7 @@ const docsNavigation = [
   ["choose-path", "Choose a path"],
   ["approval-ui", "Approval UI"],
   ["mcp", "MCP diagnostics"],
+  ["codex-config", "Configure Codex"],
   ["codex-setup-prompt", "Codex setup prompt"],
   ["verify", "Verify the result"],
   ["troubleshooting", "Troubleshooting"],
@@ -101,6 +104,21 @@ const testPrompt = `Use SlashToken as an inspection and separate-provider workfl
 If I approve a route and ask you to continue, call run_chat. Clearly label its result as a separate request sent through SlashToken's configured NVIDIA/DeepSeek provider, not as a rewritten Codex turn.
 
 请分析这个软件服务中的并发错误，并用中文给出完整修复和测试步骤。`;
+
+const codexConfigExample = `# ~/.codex/config.toml
+model = "gpt-5.6"
+model_reasoning_effort = "high"
+personality = "pragmatic"
+
+# Keep command execution interactive and workspace-scoped.
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+
+# Use cached search by default; switch to "live" for current results.
+web_search = "cached"
+
+[features]
+fast_mode = true`;
 
 interface CodeBlockProps {
   code: string;
@@ -339,8 +357,38 @@ export function DocsContent() {
             <p className="docs-fine-print"><code>optimize_prompt</code> only prepares a candidate. After your approval, <code>run_chat</code> sends the selected route as a separate request to SlashToken&apos;s configured NVIDIA/DeepSeek provider. It does not replace or rewrite the prompt already submitted to Codex.</p>
           </section>
 
+          <section id="codex-config" className="docs-section docs-anchor">
+            <p className="docs-section-number">06 / CODEX CONFIGURATION</p>
+            <h2>Adjust reasoning effort and Codex defaults</h2>
+            <p>
+              In the Codex desktop app, open <strong>Settings → Configuration → Open config.toml</strong>.
+              Personal defaults live in <code>~/.codex/config.toml</code>. For settings that should
+              apply only to a trusted repository, create <code>.codex/config.toml</code> inside that project.
+            </p>
+            <CodeBlock code={codexConfigExample} id="codex-config" label="Codex config.toml" />
+            <div className="verification-list">
+              <article>
+                <MonitorCog aria-hidden="true" />
+                <div><h3>Choose the lowest useful reasoning effort</h3><p>Start with <code>medium</code>. Use <code>low</code> for narrow, fast tasks and <code>high</code> for work that needs more planning and checking. Supported effort levels depend on the selected model; higher effort generally takes longer and uses more tokens.</p></div>
+              </article>
+              <article>
+                <ShieldCheck aria-hidden="true" />
+                <div><h3>Keep safe execution defaults</h3><p><code>approval_policy = &quot;on-request&quot;</code> lets Codex request permission when necessary, while <code>sandbox_mode = &quot;workspace-write&quot;</code> keeps ordinary edits scoped to the active workspace.</p></div>
+              </article>
+              <article>
+                <TerminalSquare aria-hidden="true" />
+                <div><h3>Use the right configuration scope</h3><p>Command-line flags override project settings, project settings override profile and user defaults, and project configuration loads only after you trust the repository.</p></div>
+              </article>
+            </div>
+            <div className="docs-callout compact-callout">
+              <h3>Change the current chat without editing the file</h3>
+              <p>Use the model and reasoning control beneath the composer, or run <code>/model</code> in an interactive Codex CLI session. File settings provide the durable default for future sessions.</p>
+              <p>Review OpenAI&apos;s <DocLink href={CODEX_CONFIG_DOCS}>configuration guide</DocLink> and <DocLink href={CODEX_CONFIG_REFERENCE_DOCS}>complete setting reference</DocLink> before adding advanced options.</p>
+            </div>
+          </section>
+
           <section id="codex-setup-prompt" className="docs-section docs-anchor">
-            <p className="docs-section-number">06 / CODEX-ASSISTED SETUP</p>
+            <p className="docs-section-number">07 / CODEX-ASSISTED SETUP</p>
             <h2>Install with a Codex prompt</h2>
             {/* CODEX_SETUP_PROMPT_INSERTION_POINT: Replace this block with Angad's supplied prompt. */}
             <div className="prompt-coming-soon">
@@ -352,7 +400,7 @@ export function DocsContent() {
           </section>
 
           <section id="verify" className="docs-section docs-anchor">
-            <p className="docs-section-number">07 / VERIFY</p>
+            <p className="docs-section-number">08 / VERIFY</p>
             <h2>Know what success looks like</h2>
             <div className="verification-list">
               <article><CheckCircle2 aria-hidden="true" /><div><h3>Qualified candidate</h3><p>A compact route appears only after language, protected-value, semantic, and savings checks pass.</p></div></article>
@@ -362,7 +410,7 @@ export function DocsContent() {
           </section>
 
           <section id="troubleshooting" className="docs-section docs-anchor">
-            <p className="docs-section-number">08 / TROUBLESHOOTING</p>
+            <p className="docs-section-number">09 / TROUBLESHOOTING</p>
             <h2>Resolve common setup problems</h2>
             <div className="troubleshooting-list">
               <details><summary><span>Python or Git is not found</span><strong>+</strong></summary><p>Install the missing prerequisite, completely close the VS Code terminal, open a new one, and rerun the four checks under Prerequisites.</p></details>

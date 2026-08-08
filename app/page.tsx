@@ -240,7 +240,7 @@ export default function Home() {
             </p>
           </div>
           <aside className="output-support-result" aria-label="Observed output-token savings">
-            <span>EARLY MVP RESULT*</span>
+            <span>OBSERVED IN EARLY MVP TESTS*</span>
             <strong>34%</strong>
             <p>average output-token savings on projects with more than 10 million output tokens</p>
           </aside>
