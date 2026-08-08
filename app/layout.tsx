@@ -21,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const host = requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host") ?? "localhost:3000";
   const protocol = requestHeaders.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
   const origin = `${protocol}://${host}`;
-  const title = "SlashToken — Cross-Lingual Token Optimization";
+  const title = "SlashToken";
   const description =
     "The shortest prompt may be in another language. SlashToken compiles multilingual prompts into verified, token-efficient representations.";
 
@@ -37,7 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       type: "website",
-      images: [{ url: new URL("/og-multilingual.png", origin).toString(), width: 1536, height: 1024, alt: "SlashToken cross-lingual token optimization" }],
+      images: [{ url: new URL("/og-multilingual.png", origin).toString(), width: 1536, height: 1024, alt: "SlashToken multilingual prompt optimization" }],
     },
     twitter: {
       card: "summary_large_image",

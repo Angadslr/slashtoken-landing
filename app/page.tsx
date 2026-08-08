@@ -59,7 +59,6 @@ export default function Home() {
         />
         <div className="hero-fade" aria-hidden="true" />
         <div className="hero-content page-shell">
-          <p className="eyebrow centered-eyebrow"><span /> Cross-lingual token optimization <span /></p>
           <h1>SlashToken <span>MVP</span></h1>
           <p className="hero-tagline">The shortest prompt may be in another language...</p>
           <p className="hero-description">Multilingual prompts, fewer tokens.</p>

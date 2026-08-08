@@ -18,7 +18,8 @@ test("server-renders the finished SlashToken landing page", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>SlashToken — Cross-Lingual Token Optimization<\/title>/i);
+  assert.match(html, /<title>SlashToken<\/title>/i);
+  assert.doesNotMatch(html, /Cross-Lingual Token Optimization/i);
   assert.match(html, /The shortest prompt may be in another language\.\.\./);
   assert.match(html, /Multilingual prompts, fewer tokens\./);
   assert.match(html, /Same request/);
