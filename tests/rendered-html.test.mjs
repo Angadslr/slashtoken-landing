@@ -38,6 +38,9 @@ test("renders the multilingual-first reader journey and real repository links", 
 
   assert.match(html, /https:\/\/github\.com\/Angadslr\/Token-Optimizer/);
   assert.match(html, /Validation gates/);
+  assert.match(html, /38%/);
+  assert.match(html, /Average input-token savings/);
+  assert.match(html, /OBSERVED IN EARLY MVP TESTS/);
   assert.match(html, /34%/);
   assert.match(html, /projects with more than 10 million output tokens/i);
   assert.match(html, /Results vary by model, language/);

@@ -27,9 +27,9 @@ const productFacts = [
     detail: "MEANING / CONSTRAINTS / LANGUAGE / VALUES / SAVINGS",
   },
   {
-    value: "01",
-    label: "Target-model request",
-    detail: "DURING NORMAL USAGE",
+    value: "38%",
+    label: "Average input-token savings",
+    detail: "OBSERVED IN EARLY MVP TESTS*",
   },
 ];
 
@@ -132,6 +132,9 @@ export default function Home() {
             </article>
           ))}
         </div>
+        <p className="metric-note page-shell">
+          *Early MVP result. Savings vary by model, source language, tokenizer, and prompt type.
+        </p>
       </section>
 
       <section id="optimization-flow" className="section optimizer-section anchor-section">
