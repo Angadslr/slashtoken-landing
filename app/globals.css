@@ -497,7 +497,7 @@ footer { padding: 56px 0; border-top: 1px solid var(--line); background: var(--b
 .docs-warning h3 { margin: 0 0 8px; font-size: 17px; }
 .docs-warning p, .docs-experimental-note p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
 .workflow-grid { display: grid; grid-template-columns: 1fr 1fr; margin-top: 34px; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
-.workflow-grid > a { min-height: 330px; display: flex; flex-direction: column; align-items: flex-start; padding: 32px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--near-black); transition: background 350ms var(--ease), color 350ms var(--ease); }
+.workflow-grid > a { min-height: 410px; display: flex; flex-direction: column; align-items: flex-start; padding: 32px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--near-black); transition: background 350ms var(--ease), color 350ms var(--ease); }
 .workflow-grid > a:hover { background: var(--lime); color: var(--black); }
 .workflow-grid > a > span { font-size: 9px; font-weight: 700; letter-spacing: 0.14em; color: var(--lime); }
 .workflow-grid > a:hover > span { color: var(--black); }
@@ -506,6 +506,14 @@ footer { padding: 56px 0; border-top: 1px solid var(--line); background: var(--b
 .workflow-grid h3 { margin: 0 0 13px; font-size: 25px; letter-spacing: -0.03em; }
 .workflow-grid p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
 .workflow-grid > a:hover p { color: rgba(0, 0, 0, 0.65); }
+.workflow-warning { display: grid; grid-template-columns: 22px 1fr; gap: 12px; margin-top: 24px; padding: 16px; border: 1px solid rgba(255, 193, 92, 0.55); background: rgba(255, 193, 92, 0.08); }
+.workflow-warning > svg { width: 20px; height: 20px; color: #ffc15c; stroke-width: 1.7; }
+.workflow-warning p { color: rgba(255, 230, 188, 0.82); font-size: 12px; line-height: 1.55; }
+.workflow-warning p strong { display: inline; margin: 0; padding: 0; color: #ffd99c; font-size: inherit; letter-spacing: 0; text-transform: none; }
+.workflow-grid > a:hover .workflow-warning { border-color: rgba(0, 0, 0, 0.42); background: rgba(0, 0, 0, 0.09); }
+.workflow-grid > a:hover .workflow-warning > svg,
+.workflow-grid > a:hover .workflow-warning p,
+.workflow-grid > a:hover .workflow-warning p strong { color: rgba(0, 0, 0, 0.72); }
 .workflow-grid strong { display: flex; align-items: center; gap: 10px; margin-top: auto; padding-top: 28px; font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; }
 .workflow-grid strong svg { width: 15px; }
 .docs-steps { display: grid; gap: 0; margin: 32px 0 0; padding: 0; border-top: 1px solid var(--line); list-style: none; }

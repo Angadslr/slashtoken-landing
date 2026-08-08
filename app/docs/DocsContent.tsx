@@ -309,10 +309,26 @@ export function DocsContent() {
           <section id="choose-path" className="docs-section docs-anchor">
             <p className="docs-section-number">04 / FIRST RUN</p>
             <h2>Choose how to try the MVP</h2>
-            <p>Both paths expose SlashToken&apos;s routing evidence, but they enter Codex at different points. Choose the approval UI for pre-send optimization or MCP for in-task inspection and a separate provider request.</p>
+            <p>Choose whether you want the full multilingual experience before a task reaches Codex, or a simpler helper that works from inside an existing Codex task.</p>
             <div className="workflow-grid">
-              <a href="#approval-ui"><span>OPTION A</span><MonitorCog aria-hidden="true" /><h3>Approval UI</h3><p>Optimize and verify a prompt before starting the Codex turn.</p><strong>Start with the UI <ArrowRight aria-hidden="true" /></strong></a>
-              <a href="#mcp"><span>OPTION B</span><TerminalSquare aria-hidden="true" /><h3>MCP diagnostics</h3><p>Inspect routing decisions from Codex and optionally run a separate request through SlashToken&apos;s configured provider.</p><strong>Register MCP <ArrowRight aria-hidden="true" /></strong></a>
+              <a href="#approval-ui">
+                <span>OPTION A · FULL EXPERIENCE</span>
+                <MonitorCog aria-hidden="true" />
+                <h3>Local UI connected to Codex</h3>
+                <p>See and approve a shorter multilingual prompt before Codex receives it, then send your chosen version with one click.</p>
+                <strong>Open the local UI <ArrowRight aria-hidden="true" /></strong>
+              </a>
+              <a href="#mcp">
+                <span>OPTION B · LIMITED MODE</span>
+                <TerminalSquare aria-hidden="true" />
+                <h3>Use SlashToken inside Codex</h3>
+                <p>Let SlashToken clean up repetitive task wording and explain its suggestions without leaving your Codex session.</p>
+                <div className="workflow-warning">
+                  <AlertTriangle aria-hidden="true" />
+                  <p><strong>Multilingual transformation is unavailable here.</strong> Codex receives your prompt before it can call SlashToken through MCP, so this option can only reduce unnecessary redundancy in tasks.</p>
+                </div>
+                <strong>Set up in Codex <ArrowRight aria-hidden="true" /></strong>
+              </a>
             </div>
           </section>
 

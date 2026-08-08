@@ -84,8 +84,11 @@ test("server-renders complete beginner installation documentation", async () => 
   assert.match(html, /05A \/ APPROVAL UI/);
   assert.match(html, /05B \/ MCP/);
   assert.match(html, /Choose how to try the MVP/);
-  assert.match(html, /Optimize and verify a prompt before starting the Codex turn/);
-  assert.match(html, /MCP diagnostics/);
+  assert.match(html, /Local UI connected to Codex/);
+  assert.match(html, /See and approve a shorter multilingual prompt before Codex receives it/);
+  assert.match(html, /Use SlashToken inside Codex/);
+  assert.match(html, /Multilingual transformation is unavailable here/);
+  assert.match(html, /can only reduce unnecessary redundancy in tasks/);
   assert.match(html, /MCP does not intercept the current prompt/);
   assert.match(html, /cannot reduce the input tokens consumed by the current Codex turn/);
   assert.match(html, /Adjust reasoning effort and Codex defaults/);
