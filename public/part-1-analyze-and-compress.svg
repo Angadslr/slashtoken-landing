@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
+  <title id="title">SlashToken demo flow, part one: Analyze and create a compact candidate</title>
+  <desc id="desc">A supported-language prompt is analyzed for safety and usefulness. Protected values are stored, a compact English candidate is created, and deterministic checks either pass the candidate forward or keep the original prompt.</desc>
+  <defs>
+    <linearGradient id="blue" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#9bc4aa"/><stop offset="1" stop-color="#6db88a"/></linearGradient>
+    <linearGradient id="orange" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#d4b86a"/><stop offset="1" stop-color="#a89352"/></linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#9bc4aa"/><stop offset="1" stop-color="#6db88a"/></linearGradient>
+    <linearGradient id="red" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#c46b6b"/><stop offset="1" stop-color="#8f4545"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#000000" flood-opacity=".28"/></filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M1 1 11 6 1 11Z" fill="#6db88a"/></marker>
+    <style>
+      .title{font:700 48px Inter,Arial,sans-serif;fill:#e8ede9}
+      .subtitle{font:400 22px Inter,Arial,sans-serif;fill:#9aa89e}
+      .step{font:700 23px Inter,Arial,sans-serif;fill:#1f2420}
+      .small{font:600 17px Inter,Arial,sans-serif;fill:#2f3b34}
+      .step-on-dark{font:700 23px Inter,Arial,sans-serif;fill:#ffffff}
+      .small-on-dark{font:600 17px Inter,Arial,sans-serif;fill:#ffffff}
+      .label{font:700 20px Inter,Arial,sans-serif;fill:#e8ede9}
+      .note{font:600 18px Inter,Arial,sans-serif;fill:#9aa89e}
+      .branch{font:800 18px Inter,Arial,sans-serif;fill:#9bc4aa}
+      .num{font:800 20px Inter,Arial,sans-serif;fill:#e8ede9}
+      .line{fill:none;stroke:#6db88a;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#arrow)}
+    </style>
+  </defs>
+
+  <text class="title" x="90" y="84">PART 1 — Analyze &amp; create a safe candidate</text>
+  <text class="subtitle" x="92" y="124">SlashToken only creates an optimized route when the prompt is suitable and protected content survives intact.</text>
+
+  <!-- input document -->
+  <g transform="translate(80 235)" filter="url(#shadow)">
+    <path d="M25 0h132l58 58v190H25z" fill="#272d28" stroke="#6db88a" stroke-width="5"/>
+    <path d="M157 0v58h58" fill="#2f3b34" stroke="#6db88a" stroke-width="5"/>
+    <path d="M58 95h122M58 132h122M58 169h83" stroke="#9aa89e" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="185" cy="215" r="48" fill="#d4b86a" stroke="#a89352" stroke-width="5"/>
+    <path d="M185 184v62M154 215h62" stroke="#1f2420" stroke-width="8" stroke-linecap="round"/>
+  </g>
+  <text class="label" x="96" y="538">Prompt in a</text>
+  <text class="label" x="78" y="566">supported language</text>
+
+  <path class="line" d="M310 375H430"/>
+
+  <!-- 1 analyze -->
+  <g transform="translate(440 240)" filter="url(#shadow)">
+    <rect width="300" height="250" rx="28" fill="url(#blue)"/>
+    <circle cx="150" cy="88" r="46" fill="none" stroke="#1f2420" stroke-width="12"/>
+    <path d="m184 122 44 44" stroke="#1f2420" stroke-width="14" stroke-linecap="round"/>
+    <text class="step" x="150" y="198" text-anchor="middle">Analyze prompt</text>
+    <text class="small" x="150" y="226" text-anchor="middle">language • risk • structure</text>
+  </g>
+  <circle cx="452" cy="255" r="23" fill="#3a433d"/><text class="num" x="452" y="262" text-anchor="middle">1</text>
+
+  <path class="line" d="M740 375H870"/>
+
+  <!-- 2 decision -->
+  <g transform="translate(880 245)" filter="url(#shadow)">
+    <path d="M28 0h292c20 0 36 16 36 36v148c0 20-16 36-36 36H176l-62 54 16-54H28c-20 0-36-16-36-36V36C-8 16 8 0 28 0Z" fill="url(#orange)"/>
+    <path d="M48 58h250M48 96h184" stroke="#1f2420" stroke-width="9" stroke-linecap="round" opacity=".22"/>
+    <text class="step" x="174" y="150" text-anchor="middle">Safe and worth</text>
+    <text class="step" x="174" y="180" text-anchor="middle">attempting?</text>
+  </g>
+  <circle cx="892" cy="260" r="23" fill="#3a433d"/><text class="num" x="892" y="267" text-anchor="middle">2</text>
+
+  <!-- YES continues right into protected-value store -->
+  <path class="line" d="M1238 365H1410"/>
+  <g transform="translate(1288 304)">
+    <rect width="88" height="42" rx="21" fill="#272d28" stroke="#3a433d" stroke-width="2"/>
+    <text class="branch" x="44" y="28" text-anchor="middle">YES</text>
+  </g>
+
+  <g transform="translate(1415 215)" filter="url(#shadow)">
+    <ellipse cx="124" cy="30" rx="104" ry="30" fill="#4a5248" stroke="#6db88a" stroke-width="4"/>
+    <path d="M20 30v142c0 17 47 31 104 31s104-14 104-31V30" fill="#3a433d" stroke="none"/>
+    <path d="M20 30v142c0 17 47 31 104 31" fill="none" stroke="#6db88a" stroke-width="4"/>
+    <path d="M228 30v142c0 17-47 31-104 31" fill="none" stroke="#6db88a" stroke-width="4"/>
+    <ellipse cx="124" cy="62" rx="90" ry="17" fill="none" stroke="#6db88a" stroke-width="3" opacity=".55"/>
+    <ellipse cx="124" cy="96" rx="90" ry="17" fill="none" stroke="#6db88a" stroke-width="3" opacity=".55"/>
+    <ellipse cx="124" cy="130" rx="90" ry="17" fill="none" stroke="#6db88a" stroke-width="3" opacity=".55"/>
+    <ellipse cx="124" cy="172" rx="104" ry="31" fill="#2f3b34" stroke="#6db88a" stroke-width="4"/>
+    <path d="M58 148h36M58 158h52M58 168h44" stroke="#9aa89e" stroke-width="5" stroke-linecap="round"/>
+    <path d="M154 148h36M154 158h28M154 168h40" stroke="#9aa89e" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <text class="label" x="1438" y="468">Protect exact values</text>
+  <text class="note" x="1400" y="498">names • code • URLs • numbers</text>
+
+  <!-- NO drops first, then turns into the fallback -->
+  <path class="line" d="M1054 519V770H810"/>
+  <g transform="translate(1078 620)">
+    <rect width="80" height="42" rx="21" fill="#272d28" stroke="#3a433d" stroke-width="2"/>
+    <text class="branch" x="40" y="28" text-anchor="middle">NO</text>
+  </g>
+  <g transform="translate(420 710)" filter="url(#shadow)">
+    <rect width="390" height="120" rx="60" fill="url(#red)"/>
+    <circle cx="72" cy="60" r="32" fill="#272d28"/>
+    <path d="M52 40l40 40M92 40 52 80" stroke="#e8ede9" stroke-width="9" stroke-linecap="round"/>
+    <text class="step-on-dark" x="230" y="52" text-anchor="middle">Keep original</text>
+    <text class="small-on-dark" x="230" y="80" text-anchor="middle">safe fallback</text>
+  </g>
+
+  <!-- compact candidate, then handoff -->
+  <path class="line" d="M1539 512V635"/>
+  <g transform="translate(1220 645)" filter="url(#shadow)">
+    <rect width="560" height="185" rx="30" fill="url(#blue)"/>
+    <path d="M68 84c16-38 64-50 98-24l15-19 6 60-57-12 20-13c-21-12-48-2-57 19" fill="url(#orange)"/>
+    <path d="M192 102c-16 38-64 50-98 24l-15 19-6-60 57 12-20 13c21 12 48 2 57-19" fill="#d4b86a"/>
+    <text class="step" x="360" y="84" text-anchor="middle">Create compact</text>
+    <text class="step" x="360" y="116" text-anchor="middle">English candidate</text>
+    <text class="small" x="360" y="150" text-anchor="middle">Protected values restored</text>
+  </g>
+  <circle cx="1235" cy="660" r="23" fill="#3a433d"/><text class="num" x="1235" y="667" text-anchor="middle">3</text>
+
+  <path class="line" d="M1500 830V900"/>
+  <g transform="translate(1220 910)" filter="url(#shadow)">
+    <rect width="560" height="82" rx="41" fill="url(#green)"/>
+    <circle cx="48" cy="41" r="26" fill="#272d28"/>
+    <path d="M38 41h22M51 29l13 12-13 12" stroke="#1f2420" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text class="step" x="318" y="50" text-anchor="middle">Candidate ready for cost + meaning checks</text>
+  </g>
+</svg>

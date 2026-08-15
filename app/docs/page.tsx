@@ -3,9 +3,9 @@ import { SiteHeader } from "../SiteHeader";
 import { DocsContent } from "./DocsContent";
 
 export const metadata: Metadata = {
-  title: "SlashToken Docs — Install the MVP",
+  title: "SlashToken Docs — Install locally",
   description:
-    "Install the SlashToken MVP on macOS or Windows and try verified multilingual routing through its approval UI or Codex MCP tools.",
+    "Install SlashToken on macOS or Windows and try verified multilingual routing through its approval UI or Codex MCP tools.",
 };
 
 export default function DocsPage() {

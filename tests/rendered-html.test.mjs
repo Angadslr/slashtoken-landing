@@ -12,57 +12,71 @@ async function render(path = "/") {
   );
 }
 
-test("server-renders the finished SlashToken landing page", async () => {
+test("server-renders the paper-and-ink SlashToken landing page", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
   assert.match(html, /<title>SlashToken<\/title>/i);
-  assert.doesNotMatch(html, /Cross-Lingual Token Optimization/i);
-  assert.match(html, /The shortest prompt may be in another language\.\.\./);
-  assert.match(html, /Multilingual prompts, fewer tokens\./);
-  assert.match(html, /Same request/);
-  assert.match(html, /Different token bill/);
-  assert.match(html, /Angadslr\/Token-Optimizer/);
-  assert.match(html, /Inspect the source/);
+  assert.match(html, /A local gateway that sends a cheaper prompt only after it proves equivalent\./);
+  assert.match(html, /Angad Srivastava/);
+  assert.match(html, /Oregon State University/);
+  assert.match(html, /Install locally/);
+  assert.match(html, /Read the method/);
+  assert.match(html, /\/SlashToken/);
   assert.match(html, /href="\/docs"[^>]*>Docs</i);
-  assert.match(html, /href="\/docs"[^>]*class="header-docs-link"/i);
-  assert.doesNotMatch(html, /aria-label="Primary navigation"|aria-controls="mobile-navigation"/i);
-  assert.match(html, /href="\/docs#quickstart"[^>]*>\s*Try it in Codex/i);
-  assert.doesNotMatch(html, /Explore the repository/i);
+  assert.match(html, /Angadslr\/Token-Optimizer/);
+  assert.match(html, /zh-code-001/);
+  assert.match(html, /original\.route/);
+  assert.match(html, /verified\.candidate/);
+  assert.match(html, /decision\.receipt/);
+  assert.match(html, /Protect names, numbers, URLs, code, quotes, IDs/);
+  assert.match(html, /Compile a compact-English candidate/);
+  assert.match(html, /local-only · prompts not persisted/);
+  assert.match(html, /git clone https:\/\/github\.com\/Angadslr\/Token-Optimizer\.git/);
+  assert.doesNotMatch(html, /Cross-Lingual Token Optimization/i);
+  assert.doesNotMatch(html, /The shortest prompt may be in another language/i);
+  assert.doesNotMatch(html, /Try it in Codex/i);
+  assert.doesNotMatch(html, /38%|34%|MVP/i);
+  assert.doesNotMatch(html, /InteractiveWavesBackground|hero-waves|Instrument_Serif|c7ff9f/i);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|PRODFLOW|Inquire Now|Lorem ipsum/i);
 });
 
-test("renders the multilingual-first reader journey and real repository links", async () => {
+test("renders the engineering-brief reader journey without lime-kit sections", async () => {
   const response = await render();
   const html = await response.text();
 
-  assert.match(html, /https:\/\/github\.com\/Angadslr\/Token-Optimizer/);
-  assert.match(html, /Validation gates/);
-  assert.match(html, /38%/);
-  assert.match(html, /Average input-token savings/);
-  assert.match(html, /OBSERVED IN EARLY MVP TESTS/);
-  assert.match(html, /34%/);
-  assert.match(html, /OBSERVED IN EARLY MVP TESTS/);
-  assert.match(html, /projects with more than 10 million output tokens/i);
-  assert.match(html, /Results vary by model, language/);
-  assert.doesNotMatch(html, /30%/);
-  assert.match(html, /Initial source languages/);
-  assert.match(html, /internal representation can change language/i);
-  assert.match(html, /id="optimization-flow"/i);
-  assert.match(html, /CROSS-LANGUAGE COMPILER/i);
-  assert.match(html, /PROTECTED-VALUE BYPASS/);
-  assert.match(html, /Meaning is verified/);
-  assert.match(html, /id="output-efficiency"/i);
-  assert.match(html, /Secondary capability/);
-  assert.match(html, /Also reduces output waste/);
-  assert.ok(html.indexOf('id="how-it-works"') < html.indexOf('id="optimization-flow"'));
-  assert.ok(html.indexOf('id="optimization-flow"') < html.indexOf('id="output-efficiency"'));
-  assert.ok(html.indexOf('id="output-efficiency"') < html.indexOf('id="open-source"'));
-  assert.doesNotMatch(html, /model_verbosity|developerInstructions|CHATBOT_OUTPUT_POLICY/);
-  assert.doesNotMatch(html, /Product principles|Developer surfaces/i);
-  assert.doesNotMatch(html, /Original route selected|02 \/ FALLBACK|id="evidence"/i);
+  assert.match(html, /Chinese, Arabic, Turkish, and Japanese/);
+  assert.match(html, /protects exact values, produces a compact-English candidate/);
+  assert.match(html, /process_batch/);
+  assert.match(html, /ERR-2048/);
+  assert.match(html, /approve\(candidate\)/);
+  assert.match(html, /Send the winner, or the original/);
+  assert.match(html, /does not claim lossless translation/);
+  assert.match(html, /High-stakes prompts are not transformed in v1/);
+  assert.match(html, /4271 exact tokens/);
+  assert.match(html, /2440 exact tokens/);
+  assert.match(html, /original\.route/);
+  assert.match(html, /verified\.candidate/);
+  assert.match(html, /project\.path/);
+  assert.match(html, /codex\.model/);
+  assert.match(html, /optimize\.language/);
+  assert.match(html, /Cropped view of a longer prompt/);
+  assert.doesNotMatch(html, /operator-console-screenshot\.png/);
+  assert.ok(html.indexOf('id="receipt"') < html.indexOf('id="method"'));
+  assert.ok(html.indexOf('id="method"') < html.indexOf('id="instrument"'));
+  assert.ok(html.indexOf('id="instrument"') < html.indexOf('id="boundaries"'));
+  assert.ok(html.indexOf('id="boundaries"') < html.indexOf('id="output-policy"'));
+  assert.ok(html.indexOf('id="output-policy"') < html.indexOf('id="install"'));
+  assert.match(html, /Less narration\. Same requirements\./);
+  assert.match(html, /optimize\.output/);
+  assert.match(html, /model_verbosity: low/);
+  assert.match(html, /agentic_coding/);
+  assert.match(html, /SlashToken never rewrites a completed answer/);
+  assert.match(html, /Made-up example for illustration/);
+  assert.doesNotMatch(html, /CROSS-LANGUAGE COMPILER|Same request\.|Different token bill/i);
+  assert.doesNotMatch(html, /Average input-token savings|Also reduces output waste|diagram-node|node-number/i);
 });
 
 test("server-renders complete beginner installation documentation", async () => {
@@ -71,10 +85,9 @@ test("server-renders complete beginner installation documentation", async () => 
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>SlashToken Docs — Install the MVP<\/title>/i);
-  assert.match(html, /EARLY MVP DOCUMENTATION/);
-  assert.match(html, /Install SlashToken\./);
-  assert.match(html, /SHOW COMMANDS FOR/);
+  assert.match(html, /<title>SlashToken Docs — Install locally<\/title>/i);
+  assert.match(html, /Install SlashToken locally/);
+  assert.match(html, /Show commands for/);
   assert.match(html, /role="tab"[^>]*aria-selected="true"[^>]*>\s*macOS/i);
   assert.match(html, /Windows · PowerShell/);
   assert.match(html, /git clone https:\/\/github\.com\/Angadslr\/Token-Optimizer\.git/);
@@ -82,9 +95,9 @@ test("server-renders complete beginner installation documentation", async () => 
   assert.match(html, /\.\\\.venv\\Scripts\\python\.exe -m pip install -e/);
   assert.match(html, /NVIDIA_API_KEY/);
   assert.match(html, /docs\.api\.nvidia\.com\/nim\/re\/docs\/api-quickstart/);
-  assert.match(html, /05A \/ APPROVAL UI/);
+  assert.match(html, /05A \/ Approval UI/);
   assert.match(html, /05B \/ MCP/);
-  assert.match(html, /Choose how to try the MVP/);
+  assert.match(html, /Choose how to try SlashToken/);
   assert.match(html, /Local UI connected to Codex/);
   assert.match(html, /See and approve a shorter multilingual prompt before Codex receives it/);
   assert.match(html, /Use SlashToken inside Codex/);
@@ -104,10 +117,11 @@ test("server-renders complete beginner installation documentation", async () => 
   assert.match(html, /https:\/\/learn\.chatgpt\.com\/docs\/extend\/mcp/);
   assert.match(html, /codex mcp add slashtoken/);
   assert.match(html, /analyze_prompt/);
-  assert.match(html, /Coming soon\./);
+  assert.match(html, /Coming soon/);
   assert.match(html, /Resolve common setup problems/);
   assert.match(html, /currently documents as experimental/);
   assert.match(html, /aria-label="Copy macOS · Terminal commands"/);
+  assert.doesNotMatch(html, /EARLY MVP DOCUMENTATION|Instrument_Serif|c7ff9f/i);
   assert.doesNotMatch(html, /ON THIS PAGE/);
   assert.doesNotMatch(html, /Choose either workflow/);
 });
@@ -134,6 +148,5 @@ test("documentation navigation targets real sections", async () => {
     assert.match(html, new RegExp(`id="${id}"`, "i"));
   }
 
-  assert.doesNotMatch(html, /aria-controls="mobile-navigation"/);
   assert.match(html, /aria-current="page"[^>]*>Docs/i);
 });

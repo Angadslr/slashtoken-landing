@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
+  <title id="title">SlashToken demo flow, part two: Verify and execute the best route</title>
+  <desc id="desc">The compact candidate must save net cost, preserve meaning and constraints, and receive user approval. Any failed gate sends the original prompt. A passed route is executed.</desc>
+  <defs>
+    <linearGradient id="blue" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#9bc4aa"/><stop offset="1" stop-color="#6db88a"/></linearGradient>
+    <linearGradient id="orange" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#d4b86a"/><stop offset="1" stop-color="#a89352"/></linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#9bc4aa"/><stop offset="1" stop-color="#6db88a"/></linearGradient>
+    <linearGradient id="red" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#c46b6b"/><stop offset="1" stop-color="#8f4545"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#000000" flood-opacity=".28"/></filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M1 1 11 6 1 11Z" fill="#6db88a"/></marker>
+    <style>
+      .title{font:700 48px Inter,Arial,sans-serif;fill:#e8ede9}
+      .subtitle{font:400 22px Inter,Arial,sans-serif;fill:#9aa89e}
+      .step{font:700 22px Inter,Arial,sans-serif;fill:#1f2420}
+      .small{font:600 16px Inter,Arial,sans-serif;fill:#2f3b34}
+      .step-on-dark{font:700 22px Inter,Arial,sans-serif;fill:#ffffff}
+      .small-on-dark{font:600 16px Inter,Arial,sans-serif;fill:#ffffff}
+      .label{font:700 20px Inter,Arial,sans-serif;fill:#e8ede9}
+      .note{font:600 17px Inter,Arial,sans-serif;fill:#9aa89e}
+      .branch{font:800 16px Inter,Arial,sans-serif;fill:#9bc4aa}
+      .num{font:800 20px Inter,Arial,sans-serif;fill:#e8ede9}
+      .line{fill:none;stroke:#6db88a;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#arrow)}
+    </style>
+  </defs>
+
+  <text class="title" x="90" y="84">PART 2 — Verify, approve &amp; execute</text>
+  <text class="subtitle" x="92" y="124">The optimized route must pass every gate. Any failure automatically returns to the untouched prompt.</text>
+
+  <!-- compact candidate from part 1 -->
+  <g transform="translate(70 215)" filter="url(#shadow)">
+    <rect width="250" height="200" rx="28" fill="url(#blue)"/>
+    <path d="M48 82c16-40 66-51 101-23l15-19 6 61-59-12 21-13c-22-12-49-3-59 20" fill="url(#orange)"/>
+    <path d="M175 98c-16 40-66 51-101 23l-15 19-6-61 59 12-21 13c22 12 49 3 59-20" fill="#d4b86a"/>
+    <text class="step" x="125" y="156" text-anchor="middle">Compact candidate</text>
+    <text class="small" x="125" y="180" text-anchor="middle">from Part 1</text>
+  </g>
+
+  <path class="line" d="M320 315H410"/>
+
+  <!-- 4 cost meter -->
+  <g transform="translate(420 195)" filter="url(#shadow)">
+    <rect width="290" height="240" rx="28" fill="url(#blue)"/>
+    <path d="M65 132a72 72 0 0 1 144 0" fill="none" stroke="#2f3b34" stroke-width="18" stroke-linecap="round"/>
+    <path d="M65 132a72 72 0 0 1 100-66" fill="none" stroke="#6db88a" stroke-width="18" stroke-linecap="round"/>
+    <path d="m137 130 50-45" stroke="#1f2420" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="137" cy="130" r="13" fill="#1f2420"/>
+    <text class="step" x="145" y="186" text-anchor="middle">Measure net cost</text>
+    <text class="small" x="145" y="214" text-anchor="middle">including verification overhead</text>
+  </g>
+  <circle cx="432" cy="210" r="23" fill="#3a433d"/><text class="num" x="432" y="217" text-anchor="middle">4</text>
+
+  <path class="line" d="M710 315H810"/>
+
+  <!-- savings decision -->
+  <g transform="translate(820 205)" filter="url(#shadow)">
+    <path d="M26 0h270c20 0 36 16 36 36v132c0 20-16 36-36 36H168l-54 50 14-50H26c-20 0-36-16-36-36V36C-10 16 6 0 26 0Z" fill="url(#orange)"/>
+    <text class="step" x="161" y="92" text-anchor="middle">Saves enough</text>
+    <text class="step" x="161" y="122" text-anchor="middle">total cost?</text>
+    <text class="small" x="161" y="156" text-anchor="middle">provider-specific threshold</text>
+  </g>
+
+  <!-- YES continues right -->
+  <path class="line" d="M1154 307H1318"/>
+  <g transform="translate(1194 246)">
+    <rect width="88" height="42" rx="21" fill="#272d28" stroke="#3a433d" stroke-width="2"/>
+    <text class="branch" x="44" y="28" text-anchor="middle">YES</text>
+  </g>
+
+  <!-- 5 meaning verification -->
+  <g transform="translate(1328 178)" filter="url(#shadow)">
+    <rect width="340" height="255" rx="30" fill="url(#blue)"/>
+    <path d="M170 42 238 67v56c0 46-28 78-68 95-40-17-68-49-68-95V67Z" fill="#272d28" opacity=".95"/>
+    <path d="m137 128 24 24 46-56" fill="none" stroke="#6db88a" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M72 98c12-40 46-70 88-76l-19-17 48 3-18 44-12-18c-30 5-54 26-65 55" fill="url(#orange)"/>
+    <path d="M268 132c-7 40-38 72-80 83l20 15-48 2 14-46 14 17c29-8 51-30 58-60" fill="#d4b86a"/>
+    <text class="step" x="170" y="228" text-anchor="middle">Verify meaning + constraints</text>
+  </g>
+  <circle cx="1340" cy="193" r="23" fill="#3a433d"/><text class="num" x="1340" y="200" text-anchor="middle">5</text>
+
+  <!-- PASS goes down into approval -->
+  <path class="line" d="M1498 433V555"/>
+  <g transform="translate(1520 468)">
+    <rect width="88" height="42" rx="21" fill="#272d28" stroke="#3a433d" stroke-width="2"/>
+    <text class="branch" x="44" y="28" text-anchor="middle">PASS</text>
+  </g>
+
+  <!-- 6 approval -->
+  <g transform="translate(1308 565)" filter="url(#shadow)">
+    <rect width="380" height="140" rx="30" fill="#272d28" stroke="#3a433d" stroke-width="2"/>
+    <circle cx="74" cy="70" r="40" fill="#3a433d"/>
+    <path d="m52 72 15 15 32-36" fill="none" stroke="#e8ede9" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <text class="step-on-dark" x="238" y="64" text-anchor="middle">User approves route</text>
+    <text class="small-on-dark" x="238" y="94" text-anchor="middle">original remains available</text>
+  </g>
+  <circle cx="1320" cy="580" r="23" fill="#3a433d"/><text class="num" x="1320" y="587" text-anchor="middle">6</text>
+
+  <!-- APPROVE continues right to execute -->
+  <path class="line" d="M1688 635H1768"/>
+  <g transform="translate(1688 574)">
+    <rect width="112" height="42" rx="21" fill="#272d28" stroke="#3a433d" stroke-width="2"/>
+    <text class="branch" x="56" y="28" text-anchor="middle">APPROVE</text>
+  </g>
+
+  <g transform="translate(1772 568) scale(.46)" filter="url(#shadow)">
+    <path d="m145 0 20 32 35-18 6 38 39-2-10 37 37 12-24 30 29 26-34 17 17 35-39 2 1 39-37-10-15 36-28-27-28 27-15-36-37 10 1-39-39-2 17-35-34-17 29-26-24-30 37-12-10-37 39 2 6-38 35 18Z" fill="url(#green)"/>
+    <path d="m101 139 31 31 63-73" fill="none" stroke="#1f2420" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text class="label" x="1838" y="748" text-anchor="middle">Approved route</text>
+  <text class="label" x="1838" y="774" text-anchor="middle">executes</text>
+
+  <!-- three independent failure drops, spaced apart -->
+  <path class="line" d="M981 441V888"/>
+  <g transform="translate(908 530)">
+    <rect width="146" height="42" rx="21" fill="#272d28" stroke="#3a433d" stroke-width="2"/>
+    <text class="branch" x="73" y="28" text-anchor="middle">NO SAVINGS</text>
+  </g>
+
+  <path class="line" d="M1368 433V488H1210V888"/>
+  <g transform="translate(1076 730)">
+    <rect width="268" height="42" rx="21" fill="#272d28" stroke="#3a433d" stroke-width="2"/>
+    <text class="branch" x="134" y="28" text-anchor="middle">MEANING / CONSTRAINT FAILS</text>
+  </g>
+
+  <path class="line" d="M1498 705V888"/>
+  <g transform="translate(1520 778)">
+    <rect width="112" height="42" rx="21" fill="#272d28" stroke="#3a433d" stroke-width="2"/>
+    <text class="branch" x="56" y="28" text-anchor="middle">DECLINE</text>
+  </g>
+
+  <g transform="translate(430 900)" filter="url(#shadow)">
+    <rect width="1160" height="118" rx="59" fill="url(#red)"/>
+    <circle cx="78" cy="59" r="34" fill="#272d28"/>
+    <path d="M56 37l44 44M100 37 56 81" stroke="#e8ede9" stroke-width="10" stroke-linecap="round"/>
+    <text class="step-on-dark" x="630" y="52" text-anchor="middle">Use original prompt</text>
+    <text class="small-on-dark" x="630" y="82" text-anchor="middle">automatic, privacy-safe fallback</text>
+  </g>
+</svg>

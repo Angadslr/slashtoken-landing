@@ -1,19 +1,5 @@
 "use client";
-/* eslint-disable @next/next/no-img-element -- vinext local image optimization has no ASSETS binding */
 
-import {
-  AlertTriangle,
-  ArrowRight,
-  Check,
-  CheckCircle2,
-  Clipboard,
-  Code2,
-  ExternalLink,
-  KeyRound,
-  MonitorCog,
-  ShieldCheck,
-  TerminalSquare,
-} from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
@@ -151,7 +137,6 @@ function CodeBlock({ code, id, label, hidden = false }: CodeBlockProps) {
       <div className="docs-code-header">
         <span>{label}</span>
         <button type="button" onClick={copy} aria-label={`Copy ${label} commands`}>
-          {status === "copied" ? <Check aria-hidden="true" /> : <Clipboard aria-hidden="true" />}
           <span aria-live="polite">
             {status === "copied" ? "Copied" : status === "error" ? "Select text" : "Copy"}
           </span>
@@ -180,7 +165,7 @@ function PlatformCode({ commands, id, platform }: PlatformCodeProps) {
 function DocLink({ href, children }: { href: string; children: ReactNode }) {
   return (
     <a className="docs-inline-link" href={href} target="_blank" rel="noreferrer">
-      {children}<ExternalLink aria-hidden="true" />
+      {children}
     </a>
   );
 }
@@ -207,31 +192,29 @@ export function DocsContent() {
 
       <div className="docs-shell">
         <aside className="docs-sidebar">
-          <p>DOCUMENTATION</p>
+          <p>Documentation</p>
           <DocumentationNavigation />
           <a className="docs-repo-link" href={REPOSITORY} target="_blank" rel="noreferrer">
-            GitHub repository <ExternalLink aria-hidden="true" />
+            GitHub repository
           </a>
         </aside>
 
         <article className="docs-article">
           <header id="quickstart" className="docs-hero docs-anchor">
             <div className="docs-breadcrumb"><Link href="/">SlashToken</Link><span>/</span><span>Docs</span></div>
-            <p className="docs-kicker"><span /> EARLY MVP DOCUMENTATION</p>
-            <h1>Install SlashToken.</h1>
+            <h1>Install SlashToken locally</h1>
             <p className="docs-lead">
-              Start with Codex and VS Code, add the small local toolchain SlashToken needs,
+              Start with Codex and VS Code, add the local toolchain SlashToken needs,
               then optimize before a Codex turn through the approval UI or inspect routing
               decisions from an active task through MCP.
             </p>
-            <div className="docs-mvp-notice">
-              <AlertTriangle aria-hidden="true" />
-              <p><strong>This is an early technical MVP.</strong> Review every route before execution and expect interfaces to evolve while the cost-and-quality hypothesis is validated.</p>
+            <div className="docs-notice">
+              <p><strong>Early technical release.</strong> Review every route before execution. Interfaces may change while the cost-and-quality hypothesis is validated.</p>
             </div>
           </header>
 
           <div className="platform-picker" role="tablist" aria-label="Installation platform">
-            <span>SHOW COMMANDS FOR</span>
+            <span>Show commands for</span>
             <button
               type="button"
               role="tab"
@@ -253,7 +236,7 @@ export function DocsContent() {
           </div>
 
           <section id="prerequisites" className="docs-section docs-anchor">
-            <p className="docs-section-number">01 / PREREQUISITES</p>
+            <p className="docs-section-number">01 / Prerequisites</p>
             <h2>Check the local toolchain</h2>
             <p>
               Open the integrated terminal in VS Code with <strong>View → Terminal</strong>.
@@ -263,9 +246,9 @@ export function DocsContent() {
             <PlatformCode commands={prerequisiteCommands} id="prerequisites" platform={platform} />
 
             <div className="requirement-grid">
-              <article><TerminalSquare aria-hidden="true" /><h3>Python 3.11+</h3><p>Install from <DocLink href="https://www.python.org/downloads/">python.org</DocLink> if the version check fails.</p></article>
-              <article><Code2 aria-hidden="true" /><h3>Git</h3><p>On Windows, use <DocLink href="https://git-scm.com/download/win">Git for Windows</DocLink>. On macOS, run <code>xcode-select --install</code>.</p></article>
-              <article><MonitorCog aria-hidden="true" /><h3>Codex CLI</h3><p>The desktop app alone may not expose <code>codex</code> in your terminal. Verify the command before continuing.</p></article>
+              <article><h3>Python 3.11+</h3><p>Install from <DocLink href="https://www.python.org/downloads/">python.org</DocLink> if the version check fails.</p></article>
+              <article><h3>Git</h3><p>On Windows, use <DocLink href="https://git-scm.com/download/win">Git for Windows</DocLink>. On macOS, run <code>xcode-select --install</code>.</p></article>
+              <article><h3>Codex CLI</h3><p>The desktop app alone may not expose <code>codex</code> in your terminal. Verify the command before continuing.</p></article>
             </div>
 
             <div className="docs-callout">
@@ -277,7 +260,7 @@ export function DocsContent() {
           </section>
 
           <section id="install" className="docs-section docs-anchor">
-            <p className="docs-section-number">02 / INSTALL</p>
+            <p className="docs-section-number">02 / Install</p>
             <h2>Clone and install SlashToken</h2>
             <p>
               Run these commands from the folder where you keep projects. The package is
@@ -285,11 +268,11 @@ export function DocsContent() {
               executables directly so shell activation is not required.
             </p>
             <PlatformCode commands={installCommands} id="install" platform={platform} />
-            <div className="docs-success-line"><CheckCircle2 aria-hidden="true" /><span>Success: the final command prints the SlashToken command help and its <code>ui</code>, <code>mcp</code>, and <code>benchmark</code> commands.</span></div>
+            <p className="docs-success-line">Success: the final command prints the SlashToken command help and its <code>ui</code>, <code>mcp</code>, and <code>benchmark</code> commands.</p>
           </section>
 
           <section id="api-key" className="docs-section docs-anchor">
-            <p className="docs-section-number">03 / CONFIGURE</p>
+            <p className="docs-section-number">03 / Configure</p>
             <h2>Connect the DeepSeek optimizer</h2>
             <p>
               Create a development key through NVIDIA&apos;s hosted API catalog, then load it
@@ -297,43 +280,39 @@ export function DocsContent() {
               transformation and verification; Codex authentication remains separate.
             </p>
             <a className="docs-action-link" href={NVIDIA_KEY_DOCS} target="_blank" rel="noreferrer">
-              Get an NVIDIA API key <ArrowRight aria-hidden="true" />
+              Get an NVIDIA API key
             </a>
             <PlatformCode commands={apiKeyCommands} id="api-key" platform={platform} />
             <div className="docs-warning">
-              <KeyRound aria-hidden="true" />
               <div><h3>Keep the credential local</h3><p>Do not commit the key, add it to project files, include it in screenshots, or pass it through <code>codex mcp add --env</code>. Set it again whenever you open a new terminal.</p></div>
             </div>
           </section>
 
           <section id="choose-path" className="docs-section docs-anchor">
-            <p className="docs-section-number">04 / FIRST RUN</p>
-            <h2>Choose how to try the MVP</h2>
+            <p className="docs-section-number">04 / First run</p>
+            <h2>Choose how to try SlashToken</h2>
             <p>Choose whether you want the full multilingual experience before a task reaches Codex, or a simpler helper that works from inside an existing Codex task.</p>
             <div className="workflow-grid">
               <a href="#approval-ui">
-                <span>OPTION A · FULL EXPERIENCE</span>
-                <MonitorCog aria-hidden="true" />
+                <span>Option A · Full experience</span>
                 <h3>Local UI connected to Codex</h3>
                 <p>See and approve a shorter multilingual prompt before Codex receives it, then send your chosen version with one click.</p>
-                <strong>Open the local UI <ArrowRight aria-hidden="true" /></strong>
+                <strong>Open the local UI</strong>
               </a>
               <a href="#mcp">
-                <span>OPTION B · LIMITED MODE</span>
-                <TerminalSquare aria-hidden="true" />
+                <span>Option B · Limited mode</span>
                 <h3>Use SlashToken inside Codex</h3>
                 <p>Let SlashToken clean up repetitive task wording and explain its suggestions without leaving your Codex session.</p>
                 <div className="workflow-warning">
-                  <AlertTriangle aria-hidden="true" />
                   <p><strong>Multilingual transformation is unavailable here.</strong> Codex receives your prompt before it can call SlashToken through MCP, so this option can only reduce unnecessary redundancy in tasks.</p>
                 </div>
-                <strong>Set up in Codex <ArrowRight aria-hidden="true" /></strong>
+                <strong>Set up in Codex</strong>
               </a>
             </div>
           </section>
 
           <section id="approval-ui" className="docs-section docs-anchor">
-            <p className="docs-section-number">05A / APPROVAL UI</p>
+            <p className="docs-section-number">05A / Approval UI</p>
             <h2>Review each route visually</h2>
             <p>This is SlashToken&apos;s pre-send optimization path for Codex. The local UI transforms and verifies the prompt first, then creates a Codex App Server turn containing only the route you select. Run the client from the repository root and leave its terminal open for the session.</p>
             <PlatformCode commands={uiCommands} id="ui" platform={platform} />
@@ -357,7 +336,6 @@ export function DocsContent() {
               where you set <code>NVIDIA_API_KEY</code> so the local MCP server inherits it.
             </p>
             <div className="docs-warning">
-              <AlertTriangle aria-hidden="true" />
               <div>
                 <h3>MCP does not intercept the current prompt</h3>
                 <p>Codex receives your message before it can call an MCP tool. SlashToken can analyze that already-received prompt, but it cannot reduce the input tokens consumed by the current Codex turn. For actual pre-send optimization, use the Approval UI; it creates a Codex App Server turn containing only your selected route.</p>
@@ -374,7 +352,7 @@ export function DocsContent() {
           </section>
 
           <section id="codex-config" className="docs-section docs-anchor">
-            <p className="docs-section-number">06 / CODEX CONFIGURATION</p>
+            <p className="docs-section-number">06 / Codex configuration</p>
             <h2>Adjust reasoning effort and Codex defaults</h2>
             <p>
               In the Codex desktop app, open <strong>Settings → Configuration → Open config.toml</strong>.
@@ -384,15 +362,12 @@ export function DocsContent() {
             <CodeBlock code={codexConfigExample} id="codex-config" label="Codex config.toml" />
             <div className="verification-list">
               <article>
-                <MonitorCog aria-hidden="true" />
                 <div><h3>Choose the lowest useful reasoning effort</h3><p>Start with <code>medium</code>. Use <code>low</code> for narrow, fast tasks and <code>high</code> for work that needs more planning and checking. Supported effort levels depend on the selected model; higher effort generally takes longer and uses more tokens.</p></div>
               </article>
               <article>
-                <ShieldCheck aria-hidden="true" />
                 <div><h3>Keep safe execution defaults</h3><p><code>approval_policy = &quot;on-request&quot;</code> lets Codex request permission when necessary, while <code>sandbox_mode = &quot;workspace-write&quot;</code> keeps ordinary edits scoped to the active workspace.</p></div>
               </article>
               <article>
-                <TerminalSquare aria-hidden="true" />
                 <div><h3>Use the right configuration scope</h3><p>Command-line flags override project settings, project settings override profile and user defaults, and project configuration loads only after you trust the repository.</p></div>
               </article>
             </div>
@@ -404,29 +379,27 @@ export function DocsContent() {
           </section>
 
           <section id="codex-setup-prompt" className="docs-section docs-anchor">
-            <p className="docs-section-number">07 / CODEX-ASSISTED SETUP</p>
+            <p className="docs-section-number">07 / Codex-assisted setup</p>
             <h2>Install with a Codex prompt</h2>
-            {/* CODEX_SETUP_PROMPT_INSERTION_POINT: Replace this block with Angad's supplied prompt. */}
             <div className="prompt-coming-soon">
-              <Code2 aria-hidden="true" />
-              <p>CODEX SETUP PROMPT</p>
-              <h3>Coming soon.</h3>
-              <span>The copyable setup prompt is being prepared. Use the manual installation above as the canonical setup path for this MVP.</span>
+              <p>Codex setup prompt</p>
+              <h3>Coming soon</h3>
+              <span>The copyable setup prompt is being prepared. Use the manual installation above as the canonical setup path for now.</span>
             </div>
           </section>
 
           <section id="verify" className="docs-section docs-anchor">
-            <p className="docs-section-number">08 / VERIFY</p>
+            <p className="docs-section-number">08 / Verify</p>
             <h2>Know what success looks like</h2>
             <div className="verification-list">
-              <article><CheckCircle2 aria-hidden="true" /><div><h3>Qualified candidate</h3><p>A compact route appears only after language, protected-value, semantic, and savings checks pass.</p></div></article>
-              <article><ShieldCheck aria-hidden="true" /><div><h3>Protected values survive exactly</h3><p>Names, numbers, URLs, code, IDs, quotations, and formatting requirements must match their original values.</p></div></article>
-              <article><ArrowRight aria-hidden="true" /><div><h3>Fallback is expected</h3><p>If the route is unsupported, risky, ambiguous, changed, or not cheaper enough, SlashToken presents the unchanged original request.</p></div></article>
+              <article><div><h3>Qualified candidate</h3><p>A compact route appears only after language, protected-value, semantic, and savings checks pass.</p></div></article>
+              <article><div><h3>Protected values survive exactly</h3><p>Names, numbers, URLs, code, IDs, quotations, and formatting requirements must match their original values.</p></div></article>
+              <article><div><h3>Fallback is expected</h3><p>If the route is unsupported, risky, ambiguous, changed, or not cheaper enough, SlashToken presents the unchanged original request.</p></div></article>
             </div>
           </section>
 
           <section id="troubleshooting" className="docs-section docs-anchor">
-            <p className="docs-section-number">09 / TROUBLESHOOTING</p>
+            <p className="docs-section-number">09 / Troubleshooting</p>
             <h2>Resolve common setup problems</h2>
             <div className="troubleshooting-list">
               <details><summary><span>Python or Git is not found</span><strong>+</strong></summary><p>Install the missing prerequisite, completely close the VS Code terminal, open a new one, and rerun the four checks under Prerequisites.</p></details>
@@ -438,14 +411,13 @@ export function DocsContent() {
               <details><summary><span>The optimized route is rejected</span><strong>+</strong></summary><p>This can be correct behavior. SlashToken rejects candidates when language, protected content, meaning, or minimum-savings checks do not qualify. Use the original route and inspect the reported fallback reason.</p></details>
             </div>
             <div className="docs-experimental-note">
-              <AlertTriangle aria-hidden="true" />
               <p>SlashToken&apos;s approval UI depends on Codex App Server, which OpenAI currently documents as experimental. Check the <DocLink href={CODEX_COMMANDS_DOCS}>developer command reference</DocLink> if a Codex update changes local App Server behavior.</p>
             </div>
           </section>
 
           <footer className="docs-footer">
-            <div><img src="/slashtoken-mark.png" alt="" width="42" height="42" /><span>SlashToken MVP Documentation</span></div>
-            <a href={REPOSITORY} target="_blank" rel="noreferrer">View source <ExternalLink aria-hidden="true" /></a>
+            <span>/SlashToken documentation</span>
+            <a href={REPOSITORY} target="_blank" rel="noreferrer">View source</a>
           </footer>
         </article>
 

@@ -1,19 +1,18 @@
 import type { Metadata } from "next";
-import { Instrument_Sans, Instrument_Serif } from "next/font/google";
+import { IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import { headers } from "next/headers";
 import "./globals.css";
 
-const instrumentSans = Instrument_Sans({
-  variable: "--font-instrument-sans",
+const ibmPlexSans = IBM_Plex_Sans({
+  variable: "--font-plex-sans",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
 });
 
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument-serif",
+const ibmPlexMono = IBM_Plex_Mono({
+  variable: "--font-plex-mono",
   subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
+  weight: ["400", "500", "600"],
 });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -23,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const origin = `${protocol}://${host}`;
   const title = "SlashToken";
   const description =
-    "The shortest prompt may be in another language. SlashToken compiles multilingual prompts into verified, token-efficient representations.";
+    "A local gateway that sends a cheaper prompt only after it proves equivalent. Optimizes Chinese, Arabic, Turkish, and Japanese prompts for Codex.";
 
   return {
     metadataBase: new URL(origin),
@@ -37,7 +36,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       type: "website",
-      images: [{ url: new URL("/og-multilingual.png", origin).toString(), width: 1536, height: 1024, alt: "SlashToken multilingual prompt optimization" }],
+      images: [{ url: new URL("/og-multilingual.png", origin).toString(), width: 1536, height: 1024, alt: "SlashToken routing receipt" }],
     },
     twitter: {
       card: "summary_large_image",
@@ -51,7 +50,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${instrumentSans.variable} ${instrumentSerif.variable}`}>
+      <body className={`${ibmPlexSans.variable} ${ibmPlexMono.variable}`}>
         {children}
       </body>
     </html>
