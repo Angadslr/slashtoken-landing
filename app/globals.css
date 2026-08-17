@@ -1074,7 +1074,8 @@ img {
   border-top: 1px solid var(--line);
 }
 
-.platform-picker + .docs-section {
+.platform-picker + .docs-section,
+.platform-picker + .docs-platform-block + .docs-section {
   margin-top: 32px;
 }
 
@@ -1100,6 +1101,8 @@ img {
 .docs-section code,
 .docs-callout code,
 .docs-steps code,
+.docs-explain code,
+.docs-warning code,
 .troubleshooting-list code {
   padding: 1px 4px;
   border: 1px solid var(--line);
@@ -1115,7 +1118,10 @@ img {
   background: var(--surface);
 }
 
-.docs-code[hidden] {
+.docs-code[hidden],
+.docs-platform-block[hidden],
+.docs-section code[hidden],
+.docs-section span[hidden] {
   display: none;
 }
 
@@ -1226,11 +1232,60 @@ img {
   font-weight: 500;
 }
 
-.docs-callout > p {
+.docs-callout > p,
+.docs-callout .docs-platform-block > p {
   margin: 0;
   color: var(--muted);
   font-size: 14px;
   line-height: 1.6;
+}
+
+.docs-callout > p + p,
+.docs-callout > p + ul,
+.docs-callout > .docs-platform-block,
+.docs-callout .docs-platform-block > p + p {
+  margin-top: 10px;
+}
+
+.docs-callout ul {
+  margin: 10px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.docs-callout li + li {
+  margin-top: 6px;
+}
+
+.docs-section > .docs-platform-block > p {
+  max-width: 640px;
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.docs-explain {
+  max-width: 640px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.docs-explain li {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.docs-explain strong {
+  color: var(--ink);
+  font-weight: 500;
 }
 
 .docs-callout > .docs-inline-link {
